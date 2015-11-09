@@ -1,0 +1,6 @@
+[09-Jun-2015 08:41:39 America/Denver] PHP Notice:  Use of undefined constant APP_BASE_PATH - assumed 'APP_BASE_PATH' in /home2/ingenuj9/public_html/PCPHRM/admin/dashboard/index.php on line 26
+[09-Jun-2015 08:41:39 America/Denver] PHP Warning:  include(): Failed opening 'APP_BASE_PATHheader.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/ingenuj9/public_html/PCPHRM/admin/dashboard/index.php on line 26
+[09-Jun-2015 08:41:39 America/Denver] PHP Notice:  Use of undefined constant APP_BASE_PATH - assumed 'APP_BASE_PATH' in /home2/ingenuj9/public_html/PCPHRM/admin/dashboard/index.php on line 27
+[09-Jun-2015 08:41:39 America/Denver] PHP Warning:  include(): Failed opening 'APP_BASE_PATHmodulejslibs.inc.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/ingenuj9/public_html/PCPHRM/admin/dashboard/index.php on line 27
+[09-Jun-2015 08:41:39 America/Denver] PHP Notice:  Use of undefined constant APP_BASE_PATH - assumed 'APP_BASE_PATH' in /home2/ingenuj9/public_html/PCPHRM/admin/dashboard/index.php on line 196
+[09-Jun-2015 08:41:39 America/Denver] PHP Warning:  include(): Failed opening 'APP_BASE_PATHfooter.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home2/ingenuj9/public_html/PCPHRM/admin/dashboard/index.php on line 196

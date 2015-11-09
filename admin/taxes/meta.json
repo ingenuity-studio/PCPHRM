@@ -1,0 +1,10 @@
+{
+	"label":"Taxes",
+	"menu":"Taxes",
+	"order":"100",
+	"icon":"fa-eur",
+	"user_levels":["Admin"],
+	"permissions":
+	{
+	}
+}
