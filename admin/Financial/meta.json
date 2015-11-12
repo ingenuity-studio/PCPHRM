@@ -1,0 +1,10 @@
+{
+"label":"Financial Settings",
+"menu":"Admin",
+"order":"9",
+"icon":"fa-usd",
+"user_levels":["Admin"],
+"permissions":
+	{
+	}
+}

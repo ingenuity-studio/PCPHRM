@@ -82,6 +82,40 @@ EducationAdapter.method('getFormFields', function() {
 });
 
 
+/**
+ * InstitutionsAdapter
+ */
+
+function InstitutionsAdapter(endPoint) {
+	this.initAdapter(endPoint);
+}
+
+InstitutionsAdapter.inherits(AdapterBase);
+
+
+
+InstitutionsAdapter.method('getDataMapping', function() {
+	return [
+		"id",
+		"name",
+	];
+});
+
+InstitutionsAdapter.method('getHeaders', function() {
+	return [
+		{ "sTitle": "ID","bVisible":false },
+		{ "sTitle": "Name" },
+	];
+});
+
+InstitutionsAdapter.method('getFormFields', function() {
+	return [
+		[ "id", {"label":"ID","type":"hidden"}],
+		[ "name", {"label":"Name","type":"text"}],
+	];
+});
+
+
 
 
 

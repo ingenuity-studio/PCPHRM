@@ -30,9 +30,10 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 	<ul class="nav nav-tabs" id="modTab" style="margin-bottom:0px;margin-left:5px;border-bottom: none;">
 		<li class="active"><a id="tabSkill" href="#tabPageSkill">Skills</a></li>
 		<li><a id="tabEducation" href="#tabPageEducation">Education</a></li>
+		<li><a id="tabInstitutions" href="#tabPageInstitutions">Institutions</a></li>
 		<li><a id="tabCertification" href="#tabPageCertification">Certifications</a></li>
 		<li><a id="tabLanguage" href="#tabPageLanguage">Languages</a></li>
-		<li><a id="tabDuties" href="#tabPageDuties">General Duties</a></li>
+		<li><a id="tabDuties" href="#tabPageDuties">Duties</a></li>
 	</ul>
 	 
 	<div class="tab-content">
@@ -50,6 +51,14 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 			</div>
 			<div id="EducationForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
 		
+			</div>
+		</div>
+		<div class="tab-pane" id="tabPageInstitutions">
+			<div id="Institutions" class="reviewBlock" data-content="List" style="padding-left:5px;">
+
+			</div>
+			<div id="InstitutionsForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+
 			</div>
 		</div>
 		<div class="tab-pane" id="tabPageCertification">
@@ -105,7 +114,7 @@ modJsList['tabEducation'].setShowDelete(false);
 modJsList['tabEducation'].setShowEdit(false);
 <?php }?>
 
-
+modJsList['tabInstitutions'] = new InstitutionsAdapter('Institutions');
 
 modJsList['tabCertification'] = new CertificationAdapter('Certification');
 <?php if(isset($modulePermissions['perm']['Add Certifications']) && $modulePermissions['perm']['Add Certifications'] == "No"){?>

@@ -1,10 +1,5 @@
 <?php
-include (APP_BASE_PATH."modules/leaves/api/LeavesEmailSender.php");
-class AdminLeavesEmailSender extends LeavesEmailSender{
-
-}
-
-class LeavesActionManager extends SubActionManager{
+class FinancialActionManager extends SubActionManager{
 	
 	const FULLDAY = 1;
 	const HALFDAY = 0;
@@ -35,7 +30,10 @@ class LeavesActionManager extends SubActionManager{
 
 		$employeeLeaveDay = new EmployeeLeaveDay();
 		$days = $employeeLeaveDay->Find("employee_leave = ?",array($leaveId));
-
+		
+		
+		
+		
 		return new IceResponse(IceResponse::SUCCESS,array($days,$leaves));
 	}
 	

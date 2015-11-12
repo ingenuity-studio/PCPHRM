@@ -291,6 +291,7 @@ class BaseService{
 	public function addElement($table,$obj){
 		$isAdd = true;
 		$ele = new $table();
+
 		if(class_exists("ProVersion")){
 			$pro = new ProVersion();
 			$subscriptionTables = $pro->getSubscriptionTables();
@@ -328,15 +329,15 @@ class BaseService{
 				}		
 			}
 		}
-		
+
 		$this->checkSecureAccess("save",$ele);
 
 		$resp =$ele->validateSave($ele);
 
+
  		if($resp->getStatus() != IceResponse::SUCCESS){
 			return $resp;
 		}
-		
 		if($isAdd){
 			if(empty($ele->created)){
 				$ele->created = date("Y-m-d H:i:s");
@@ -358,7 +359,7 @@ class BaseService{
         if(!$ok){
 
             $error = $ele->ErrorMsg();
-			
+			print_r($error);exit;
 			LogManager::getInstance()->info($error);
 			
 			if($isAdd){
@@ -432,11 +433,10 @@ class BaseService{
 	}
 	
 	public function getFieldValues($table,$key,$value){
-		
 		$values = explode("+", $value);
-		
 		$ret = array();
 		$ele = new $table();
+
 		$list = $ele->Find('1 = 1',array());
 		foreach($list as $obj){
 			if(count($values) == 1){
@@ -451,7 +451,7 @@ class BaseService{
 				}
 				$ret[$obj->$key] = $objVal;
 			}
-		}	
+		}
 		return $ret;
 	}
 	
@@ -633,8 +633,10 @@ class BaseService{
 		//Construct permission method
 		$permMethod = "get".$this->currentUser->user_level."Access";
 		$accessMatrix = $object->$permMethod();
+
 		if (in_array($type, $accessMatrix)) {
 			//The user has required permission, so return true
+
 			return true;
 		}else{
 			//Now we need to check whther the user has access to his own records

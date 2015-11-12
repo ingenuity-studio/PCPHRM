@@ -381,7 +381,7 @@ EmployeeLeaveAdapter.method('getFormFields', function() {
 
 EmployeeLeaveAdapter.method('getFilters', function() {
 	return [
-	        [ "employee", {"label":"Employee","type":"select2","allow-null":false,"remote-source":["Employee","id","first_name+last_name"]}],
+			[ "employee", {"label":"Employee","type":"select2","allow-null":false,"remote-source":["Employee","	id","first_name+last_name"]}],
 	        [ "leave_type", {"label":"Leave Type","type":"select","allow-null":true,"null-label":"All Leave Types","remote-source":["LeaveType","id","name"]}]
 	];
 });

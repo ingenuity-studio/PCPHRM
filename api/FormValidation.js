@@ -55,7 +55,15 @@ function FormValidation(formId,validateAll,options) {
 			 		return false;
 			 	}
 			},
-			
+
+			postiveNumber: function (str) {
+				var numstr = /^\d*[1-9]\d*$/;
+				if (str != null && str.match(numstr)) {
+					return true;
+				} else {
+					return false;
+				}
+			},
 			
 			email: function (str) {   
 				var emailPattern = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;  
