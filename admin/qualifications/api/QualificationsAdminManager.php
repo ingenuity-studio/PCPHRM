@@ -20,6 +20,8 @@ if (!class_exists('QualificationsAdminManager')) {
 			$this->addModelClass('Education');
 			$this->addModelClass('Certification');
 			$this->addModelClass('Language');
+			$this->addModelClass('Duties');
+
 			
 			
 		}
@@ -92,4 +94,19 @@ if (!class_exists('Skill')) {
 		}
 	}
 
+	class Duties extends ICEHRM_Record {
+			var $_table = 'Duties';
+
+			public function getAdminAccess(){
+				return array("get","element","save","delete");
+			}
+
+			public function getManagerAccess(){
+				return array("get","element","save","delete");
+			}
+
+			public function getUserAccess(){
+				return array();
+			}
+		}
 }

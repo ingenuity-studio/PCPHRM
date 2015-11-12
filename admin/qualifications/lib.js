@@ -159,3 +159,39 @@ LanguageAdapter.method('getFormFields', function() {
 	];
 });
 
+
+/**
+ * DutiesAdapter
+ */
+
+function DutiesAdapter(endPoint) {
+	this.initAdapter(endPoint);
+}
+
+DutiesAdapter.inherits(AdapterBase);
+
+DutiesAdapter.method('getDataMapping', function() {
+	return [
+		"id",
+		"name"
+	];
+});
+
+DutiesAdapter.method('getHeaders', function() {
+	return [
+		{ "sTitle": "ID","bVisible":false },
+		{ "sTitle": "Name" },
+	];
+});
+
+DutiesAdapter.method('getFormFields', function() {
+	return [
+		[ "id", {"label":"ID","type":"hidden"}],
+		[ "name", {"label":"Name","type":"text"}],
+		[ "type", {"label":"Type","type":"select","source":[["1","General Duties"],["2","Strategic Duties"],["3","Technical Duties"]]}],
+
+	];
+});
+
+DutiesAdapter.method('getHelpLink', function () {
+});

@@ -51,7 +51,7 @@ class BaseService{
 	}
 	
 	public function get($table,$mappingStr = null, $filterStr = null, $orderBy = null, $limit = null){
-		
+
 		if(!empty($mappingStr)){
 		$map = json_decode($mappingStr);
 		}
@@ -301,7 +301,7 @@ class BaseService{
 				}
 			}
 		}
-		
+
 		if(!empty($obj['id'])){
 			$isAdd = false;
 			$ele->Load('id = ?',array($obj['id']));	
@@ -314,10 +314,9 @@ class BaseService{
 			if($v == "NULL"){
 				$v = null;	
 			}
-			$ele->$k = $v;	
+			$ele->$k = $v;
 		}
-		
-		
+
 		if(empty($obj['id'])){	
 			if(in_array($table, $this->userTables)){
 				$cemp = $this->getCurrentProfileId();
@@ -331,9 +330,10 @@ class BaseService{
 		}
 		
 		$this->checkSecureAccess("save",$ele);
-		
+
 		$resp =$ele->validateSave($ele);
-		if($resp->getStatus() != IceResponse::SUCCESS){
+
+ 		if($resp->getStatus() != IceResponse::SUCCESS){
 			return $resp;
 		}
 		
@@ -346,17 +346,18 @@ class BaseService{
 		if(empty($ele->updated)){
 			$ele->updated = date("Y-m-d H:i:s");
 		}
-		if($isAdd){
+
+        if($isAdd){
 			$ele = $ele->executePreSaveActions($ele)->getData();
 		}else{
 			$ele = $ele->executePreUpdateActions($ele)->getData();
 		}
-		
-		
+
 		$ok = $ele->Save();
-		if(!$ok){
-			
-			$error = $ele->ErrorMsg();
+
+        if(!$ok){
+
+            $error = $ele->ErrorMsg();
 			
 			LogManager::getInstance()->info($error);
 			
@@ -375,8 +376,8 @@ class BaseService{
 			$ele->executePostUpdateActions($ele);
 			$this->audit(IceConstants::AUDIT_EDIT, "Edited an object in ".$table." [id:".$ele->id."]");
 		}
-		
-		return new IceResponse(IceResponse::SUCCESS,$ele);
+
+        return new IceResponse(IceResponse::SUCCESS,$ele);
 	}
 	
 	public function deleteElement($table,$id){
@@ -660,7 +661,8 @@ class BaseService{
 		
 		$ret['status'] = "ERROR";
 		$ret['message'] = "Access violation";
-		echo json_encode($ret);
+
+        echo json_encode($ret);
 		exit();
 	}
 	

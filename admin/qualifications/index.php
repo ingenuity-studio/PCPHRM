@@ -32,6 +32,7 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 		<li><a id="tabEducation" href="#tabPageEducation">Education</a></li>
 		<li><a id="tabCertification" href="#tabPageCertification">Certifications</a></li>
 		<li><a id="tabLanguage" href="#tabPageLanguage">Languages</a></li>
+		<li><a id="tabDuties" href="#tabPageDuties">General Duties</a></li>
 	</ul>
 	 
 	<div class="tab-content">
@@ -67,7 +68,15 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 		
 			</div>
 		</div>
-	</div>
+		<div class="tab-pane" id="tabPageDuties">
+			<div id="Duties" class="reviewBlock" data-content="List" style="padding-left:5px;">
+
+			</div>
+			<div id="DutiesForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+
+			</div>
+		</div>
+
 
 </div>
 <script>
@@ -120,6 +129,8 @@ modJsList['tabLanguage'].setShowDelete(false);
 <?php if(isset($modulePermissions['perm']['Edit Languages']) && $modulePermissions['perm']['Edit Languages'] == "No"){?>
 modJsList['tabLanguage'].setShowEdit(false);
 <?php }?>
+
+modJsList['tabDuties'] = new DutiesAdapter('Duties');
 
 var modJs = modJsList['tabSkill'];
 

@@ -8,8 +8,6 @@ function EmployeeAdapter(endPoint) {
 
 EmployeeAdapter.inherits(AdapterBase);
 
-
-
 EmployeeAdapter.method('getDataMapping', function() {
 	return [
 	        "id",
@@ -94,18 +92,16 @@ EmployeeAdapter.method('getHelpLink', function () {
 });
 
 EmployeeAdapter.method('transferEmployee', function() {
-	$('#transferModal').modal('show');
+	$('#tabProject').modal('show');
 });
 
 EmployeeAdapter.method('closeTransferWindows', function() {
-	$('#transferModal').modal('hide');
+	$('#tabProject').modal('hide');
 });
 
 
-
-
-function ProjectAdapter() {
-	this.initAdapter();
+function ProjectAdapter(endPoint) {
+	this.initAdapter(endPoint);
 }
 
 ProjectAdapter.inherits(AdapterBase);
@@ -122,4 +118,3 @@ ProjectAdapter.method('getFormFields',function(){
 	["project", {"label":"Project","type": "select2","remote-source":["projects","id","name"]}],
 	];
 });
-
