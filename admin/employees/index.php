@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $moduleName = 'employees';
 define('MODULE_PATH',dirname(__FILE__));

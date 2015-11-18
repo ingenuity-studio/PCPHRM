@@ -1,4 +1,4 @@
-<?php 
+<?php
 ini_set('error_log', '/tmp/pcphrm.log');
 
 define('CLIENT_NAME', 'app');

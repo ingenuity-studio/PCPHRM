@@ -51,7 +51,7 @@ class BaseService{
 	}
 	
 	public function get($table,$mappingStr = null, $filterStr = null, $orderBy = null, $limit = null){
-		
+
 		if(!empty($mappingStr)){
 		$map = json_decode($mappingStr);
 		}
@@ -291,6 +291,7 @@ class BaseService{
 	public function addElement($table,$obj){
 		$isAdd = true;
 		$ele = new $table();
+
 		if(class_exists("ProVersion")){
 			$pro = new ProVersion();
 			$subscriptionTables = $pro->getSubscriptionTables();
@@ -301,7 +302,7 @@ class BaseService{
 				}
 			}
 		}
-		
+
 		if(!empty($obj['id'])){
 			$isAdd = false;
 			$ele->Load('id = ?',array($obj['id']));	
@@ -314,10 +315,9 @@ class BaseService{
 			if($v == "NULL"){
 				$v = null;	
 			}
-			$ele->$k = $v;	
+			$ele->$k = $v;
 		}
-		
-		
+
 		if(empty($obj['id'])){	
 			if(in_array($table, $this->userTables)){
 				$cemp = $this->getCurrentProfileId();
@@ -329,14 +329,15 @@ class BaseService{
 				}		
 			}
 		}
-		
+
 		$this->checkSecureAccess("save",$ele);
-		
+
 		$resp =$ele->validateSave($ele);
-		if($resp->getStatus() != IceResponse::SUCCESS){
+
+
+ 		if($resp->getStatus() != IceResponse::SUCCESS){
 			return $resp;
 		}
-		
 		if($isAdd){
 			if(empty($ele->created)){
 				$ele->created = date("Y-m-d H:i:s");
@@ -346,18 +347,19 @@ class BaseService{
 		if(empty($ele->updated)){
 			$ele->updated = date("Y-m-d H:i:s");
 		}
-		if($isAdd){
+
+        if($isAdd){
 			$ele = $ele->executePreSaveActions($ele)->getData();
 		}else{
 			$ele = $ele->executePreUpdateActions($ele)->getData();
 		}
-		
-		
+
 		$ok = $ele->Save();
-		if(!$ok){
-			
-			$error = $ele->ErrorMsg();
-			
+
+        if(!$ok){
+
+            $error = $ele->ErrorMsg();
+			print_r($error);exit;
 			LogManager::getInstance()->info($error);
 			
 			if($isAdd){
@@ -375,8 +377,8 @@ class BaseService{
 			$ele->executePostUpdateActions($ele);
 			$this->audit(IceConstants::AUDIT_EDIT, "Edited an object in ".$table." [id:".$ele->id."]");
 		}
-		
-		return new IceResponse(IceResponse::SUCCESS,$ele);
+
+        return new IceResponse(IceResponse::SUCCESS,$ele);
 	}
 	
 	public function deleteElement($table,$id){
@@ -431,11 +433,10 @@ class BaseService{
 	}
 	
 	public function getFieldValues($table,$key,$value){
-		
 		$values = explode("+", $value);
-		
 		$ret = array();
 		$ele = new $table();
+
 		$list = $ele->Find('1 = 1',array());
 		foreach($list as $obj){
 			if(count($values) == 1){
@@ -450,7 +451,7 @@ class BaseService{
 				}
 				$ret[$obj->$key] = $objVal;
 			}
-		}	
+		}
 		return $ret;
 	}
 	
@@ -632,8 +633,10 @@ class BaseService{
 		//Construct permission method
 		$permMethod = "get".$this->currentUser->user_level."Access";
 		$accessMatrix = $object->$permMethod();
+
 		if (in_array($type, $accessMatrix)) {
 			//The user has required permission, so return true
+
 			return true;
 		}else{
 			//Now we need to check whther the user has access to his own records
@@ -660,7 +663,8 @@ class BaseService{
 		
 		$ret['status'] = "ERROR";
 		$ret['message'] = "Access violation";
-		echo json_encode($ret);
+
+        echo json_encode($ret);
 		exit();
 	}
 	

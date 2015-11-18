@@ -22,8 +22,8 @@ Developer: Thilina Hasantha (thilina.hasantha[at]gmail.com / facebook.com/thilin
 */
 
 
-class DashboardActionManager extends SubActionManager{
-
+class EmployeesActionManager extends SubActionManager{
+	
 	public function getInitData($req){
 
 		$data = array();

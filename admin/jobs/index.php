@@ -62,12 +62,11 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 
 </div>
 <script>
-var modJsList = new Array();
 
+var modJsList = new Array();
 modJsList['tabJobTitles'] = new JobTitleAdapter('JobTitle');
 modJsList['tabPayGrades'] = new PayGradeAdapter('PayGrade');
 modJsList['tabEmploymentStatus'] = new EmploymentStatusAdapter('EmploymentStatus');
-
 var modJs = modJsList['tabJobTitles'];
 
 </script>

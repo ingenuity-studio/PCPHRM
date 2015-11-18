@@ -63,7 +63,6 @@ function createPermissions($meta, $moduleId) {
 $dbModule = new Module();
 $adminDbModules = $dbModule->Find("mod_group = ?", array("admin"));
 $userDbModules = $dbModule->Find("mod_group = ?", array("user"));
-
 $adminDBModuleList = array();
 foreach ($adminDbModules as $dbm) {
     $adminDBModuleList[$dbm->name] = $dbm;
@@ -101,6 +100,7 @@ foreach ($ams as $am) {
             if ($dbModule->status == 'Disabled') {
                 continue;
             }
+
         } else {
             $dbModule = new Module();
             $dbModule->menu = $arr['menu'];
@@ -132,6 +132,7 @@ foreach ($ams as $am) {
 
         $moduleCapsName = ucfirst($am);
         $initFile = CLIENT_PATH . '/admin/' . $am . "/api/" . $moduleCapsName . "Initialize.php";
+
         if (file_exists($initFile)) {
             include $initFile;
             $class = $moduleCapsName . "Initialize";
@@ -170,6 +171,7 @@ foreach ($ams as $am) {
             if ($dbModule->status == 'Disabled') {
                 continue;
             }
+
         } else {
             $dbModule = new Module();
             $dbModule->menu = $arr['menu'];
@@ -237,7 +239,6 @@ foreach ($adminMenus as $menu) {
         $added[] = $menu;
     }
 }
-
 
 foreach ($adminModulesTemp as $k => $v) {
     if (!in_array($k, $added)) {

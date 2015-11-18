@@ -1,8 +1,10 @@
 <?php
 define('CLIENT_PATH', dirname(__FILE__));
+
 include ("config.base.php");
 include ("include.common.php");
 include("server.includes.inc.php");
+
 if (empty($user)) {
     if (!empty($_REQUEST['username']) && !empty($_REQUEST['password'])) {
         $suser = null;

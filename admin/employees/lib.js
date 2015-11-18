@@ -36,6 +36,10 @@ EmployeeAdapter.method('getHeaders', function() {
 	];
 });
 
+EmployeeAdapter.method('getInitData', function() {
+    alert('x');
+});
+
 EmployeeAdapter.method('getFormFields', function() {
 	return [
 	        [ "id", {"label":"ID","type":"hidden","validation":""}],
@@ -47,13 +51,23 @@ EmployeeAdapter.method('getFormFields', function() {
 	        [ "birthday", {"label":"Date of Birth","type":"date","validation":""}],
 	        [ "gender", {"label":"Gender","type":"select","source":[["Male","Male"],["Female","Female"]]}],
 	        [ "marital_status", {"label":"Marital Status","type":"select","source":[["Married","Married"],["Single","Single"],["Divorced","Divorced"],["Widowed","Widowed"],["Other","Other"]]}],
-	        [ "ssn_num", {"label":"SSN/NRIC","type":"text","validation":"none"}],
+			[ "military_status", {"label":"Military Status","type":"select","source":[["Completed","Completed"],["Not Applied","Not Applied"],["Exempted","Exempted"]]}],
+			[ "id_number", {"label":"ID Number","type":"text", "required":true }],
+			[ "id_expdate", {"label":"ID Expire Date","type":"date", "required":true }],
+			[ "employee_education", {"label":"Education Degree","type":"select","validation":"none","remote-source":["Education","id","name"]}],
+			[ "employee_institution", {"label":"Education institution","type":"select","validation":"none","remote-source":["Institutes","id","name"]}],
+			[ "ssn_num", {"label":"SSN/NRIC","type":"text","validation":"none"}],
 	        [ "nic_num", {"label":"NIC","type":"text","validation":"none"}],
 	        [ "other_id", {"label":"Other ID","type":"text","validation":"none"}],
-	        [ "driving_license", {"label":"Driving License No","type":"text","validation":"none"}],
-	        /*[ "driving_license_exp_date", {"label":"License Exp Date","type":"date","validation":"none"}],*/
+	        [ "car_owner", {"label":"Car Owner?","type":"select","validation":"none","source":[["Yes","Yes"],["No","No"]]}],
+			[ "driving_license", {"label":"Driving License No","type":"text","validation":"none","name":"dl"}],
+			[ "driving_license_exp_date", {"label":"License Exp Date","type":"date","validation":"none"}],
+     		[ "bank_account", {"label":"Bank Account Number","type":"text","validation":"none"}],
+			[ "contract_startdate", {"label":"Contract Signature Date","type":"date","require":true}],
+			[ "contract_enddate", {"label":"Contract End Date","type":"date","require":true}],
 	        [ "employment_status", {"label":"Employment Status","type":"select2","remote-source":["EmploymentStatus","id","name"]}],
-	        [ "job_title", {"label":"Job Title","type":"select2","remote-source":["JobTitle","id","name"]}],
+			[ "image", {"label":"Employee Image","type":"fileupload", "required":false ,"validation":"none"}],
+			[ "job_title", {"label":"Job Title","type":"select2","remote-source":["JobTitle","id","name"]}],
 	        [ "pay_grade", {"label":"Pay Grade","type":"select2","allow-null":true,"remote-source":["PayGrade","id","name"]}],
 	        [ "work_station_id", {"label":"Work Station Id","type":"text","validation":"none"}],
 	        [ "address1", {"label":"Address Line 1","type":"text","validation":"none"}],
@@ -73,6 +87,7 @@ EmployeeAdapter.method('getFormFields', function() {
 	        [ "supervisor", {"label":"Supervisor","type":"select2","allow-null":true,"remote-source":["Employee","id","first_name+last_name"]}],
 	];
 });
+
 
 EmployeeAdapter.method('getFilters', function() {
 	return [
@@ -100,6 +115,14 @@ EmployeeAdapter.method('transferEmployee', function() {
 EmployeeAdapter.method('closeTransferWindows', function() {
 	$('#transferModal').modal('hide');
 });
+
+EmployeeAdapter.method('addEducation', function(instituteField) {
+    var copyEducation = $("#field_employee_education").clone();
+    var copyInstitute = $("#field_employee_institution").clone();
+    instituteField.after(copyInstitute);
+    instituteField.after(copyEducation);
+});
+
 
 
 

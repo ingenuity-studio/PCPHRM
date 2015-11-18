@@ -16,7 +16,6 @@ class SettingsManager{
 	}
 	
 	public function getSetting($name){
-		
 		if(class_exists("ProVersion")){
 			$pro = new ProVersion();
 			$val =	$pro->getSetting($name);
@@ -24,7 +23,7 @@ class SettingsManager{
 				return $val;
 			}
 		}
-		
+
 		$setting = new Setting();
 		$setting->Load("name = ?",array($name));
 		if($setting->name == $name){

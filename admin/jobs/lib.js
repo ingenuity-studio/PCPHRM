@@ -34,9 +34,21 @@ JobTitleAdapter.method('getHeaders', function() {
 JobTitleAdapter.method('getFormFields', function() {
 	return [
 	        [ "id", {"label":"ID","type":"hidden"}],
-	        [ "code", {"label":"Job Title Code","type":"text"}],
-	        [ "name", {"label":"Job Title","type":"text"}],
-	        [ "description", {"label":"Description","type":"textarea"}],
+			[ "name", {"label":"Job Title","type":"text"}],
+			[ "code", {"label":"Job Title Code","type":"text"}],
+		    [ "department", {"label":"Job Department","type":"select2","remote-source":["CompanyStructures","id","name"]}],
+		    [ "grade_category", {"label":"Grade Category","type":"select2","remote-source":["PayGrade","id","name"]}],
+		    [ "reporting_to", {"label":"Reporting To","type":"select2","remote-source":["Employees","id","first_name+last_name"]}],
+		    [ "benefits", {"label":"Benefits","type":"select2","remote-source":["Benefits","id","name"]}],
+		    [ "job_summry", {"label":"Job Summry","type":"textarea"}],
+		    [ "general_duties", {"label":"General Duties","type":"select2","remote-source":["JobDuties","id","name"]}],
+		    [ "technical_duties", {"label":"Technical Duties","type":"select2","remote-source":["JobDuties","id","name"]}],
+		    [ "strategic_duties", {"label":"Strategic Duties","type":"select2","remote-source":["JobDuties","id","name"]}],
+			[ "education", {"label":"Education Degree","type":"select2","validation":"none","remote-source":["Educations","id","name"]}],
+			[ "language", {"label":"Languages","type":"select2","validation":"none","remote-source":["Languages","id","name"]}],
+			[ "work_location", {"label":"Work Location","type":"select2","source":[["Office","Office"],["Site","Site"]]}],
+			[ "professional_knowledge", {"label":"Professional knowledge","type":"text"}],
+			[ "description", {"label":"Description","type":"textarea"}],
 	        [ "specification", {"label":"Specification","type":"textarea"}]
 	];
 });
