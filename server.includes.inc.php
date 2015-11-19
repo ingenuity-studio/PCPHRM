@@ -70,11 +70,12 @@ BaseService::getInstance()->setSettingsManager($settingsManager);
 
 $notificationManager->setBaseService($baseService);
 
-
+$debugMode = '0';
 
 $noJSONRequests = SettingsManager::getInstance()->getSetting("System: Do not pass JSON in request");
 
 $debugMode = SettingsManager::getInstance()->getSetting("System: Debug Mode");
+
 if($debugMode == "1"){
 	if(!defined('LOG_LEVEL')){define('LOG_LEVEL',Monolog\Logger::DEBUG);}	
 }else{
@@ -89,28 +90,28 @@ $mysqlErrors = array();
 //============ Start - Initializing Modules ==========
 if(defined('CLIENT_PATH')){
 	include 'modules.php';
-	
-	
+
+
 	$moduleManagers = BaseService::getInstance()->getModuleManagers();
-	
+
 	foreach($moduleManagers as $moduleManagerObj){
 		
 		$moduleManagerObj->setupModuleClassDefinitions();
 		$moduleManagerObj->initializeUserClasses();
 		$moduleManagerObj->initializeFieldMappings();
 		$moduleManagerObj->initializeDatabaseErrorMappings();
-		
 		$moduleManagerObj->setupUserClasses($userTables);
 		$moduleManagerObj->setupFileFieldMappings($fileFields);
 		$moduleManagerObj->setupErrorMappings($mysqlErrors);
-		
 		$modelClassList = $moduleManagerObj->getModelClasses();
-		
 		foreach($modelClassList as $modelClass){
 			$modelClass::SetDatabaseAdapter($dbLocal);
 		}
 	}
 }
+
+
+
 //============= End - Initializing Modules ============
 
 BaseService::getInstance()->setFileFields($fileFields);

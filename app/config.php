@@ -1,13 +1,13 @@
-<?php 
+<?php
 ini_set('error_log', '/tmp/pcphrm.log');
 
 define('CLIENT_NAME', 'app');
 define('APP_BASE_PATH', 'C:/xampp/htdocs/PCPHRM/');
-define('CLIENT_BASE_PATH', 'C:/xampp/htdocs//PCPHRM/app/');
+define('CLIENT_BASE_PATH', 'C:/xampp/htdocs/PCPHRM/app/');
 define('BASE_URL','http://localhost/PCPHRM/');
 define('CLIENT_BASE_URL','http://localhost/PCPHRM/app/');
 
-define('APP_DB', 'ingenuj9_PCPhrm');
+define('APP_DB', 'ingenuj9_pcphrm');
 define('APP_USERNAME', 'root');
 define('APP_PASSWORD', '');
 define('APP_HOST', 'localhost');

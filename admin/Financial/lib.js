@@ -67,10 +67,11 @@ BenefitsAdapter.method('getHeaders', function() {
 
 BenefitsAdapter.method('getFormFields', function() {
 	return [
+		[ "benefitscategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["benefitscategorys","id","name"]}],
+		[ "benefitssubcategory_id", {"label":"Sub Category","type":"select2", "allow-null":false , "remote-source":["benefitscategorys","id","name"]}],
 		[ "id", {"label":"ID","type":"hidden","validation":""}],
 		[ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
-		[ "benefitscategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["benefitscategorys","id","name"]}],
-	];
+		];
 });
 
 BenefitsAdapter.method('getHelpLink', function () {
@@ -104,12 +105,13 @@ AdvantagesAdapter.method('getHeaders', function() {
 
 AdvantagesAdapter.method('getFormFields', function() {
 	return [
+		[ "advantagescategorys_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["advantagescategorys","id","name"]}],
+		[ "advantagessubcategorys_id", {"label":"Sub Category","type":"select2", "allow-null":false , "remote-source":["advantagescategorys","id","name"]}],
 		[ "id", {"label":"ID","type":"hidden","validation":""}],
 		[ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
 		[ "depreciation_time", {"label":"Depreciation Date","type":"date", "required":true ,"validation":""}],
 		[ "depreciation_percentage", {"label":"Depreciation percentage %","type":"text", "required":true ,"validation":"postiveNumber"}],
 		[ "image", {"label":"Item Image","type":"fileupload", "required":false ,"validation":"none"}],
-		[ "advantagescategorys_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["advantagescategorys","id","name"]}],
 	];
 });
 
@@ -143,10 +145,11 @@ AllowancesAdapter.method('getHeaders', function() {
 
 AllowancesAdapter.method('getFormFields', function() {
     return [
-        [ "id", {"label":"ID","type":"hidden","validation":""}],
+		[ "allowancescategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["allowancescategorys","id","name"]}],
+		[ "allowancessubcategory_id", {"label":"Sub Category","type":"select2", "allow-null":false , "remote-source":["allowancescategorys","id","name"]}],
+		[ "id", {"label":"ID","type":"hidden","validation":""}],
         [ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
-        [ "allowncescategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["allowancescategorys","id","name"]}],
-    ];
+       ];
 });
 
 AllowancesAdapter.method('getHelpLink', function () {

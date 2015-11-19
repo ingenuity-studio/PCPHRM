@@ -23,7 +23,6 @@ $columns[]="id";
 $table = $_REQUEST['t'];
 $obj = new $table();
 
-
 $sLimit = "";
 if ( isset( $_REQUEST['iDisplayStart'] ) && $_REQUEST['iDisplayLength'] != '-1' ){
 	$sLimit = " LIMIT ".intval( $_REQUEST['iDisplayStart'] ).", ".intval( $_REQUEST['iDisplayLength'] );
@@ -61,11 +60,10 @@ if(in_array($table, BaseService::getInstance()->userTables) && !$skipProfileRest
 	$cemp = BaseService::getInstance()->getCurrentProfileId();
 	$sql = "Select count(id) as count from ".$obj->_table." where ".SIGN_IN_ELEMENT_MAPPING_FIELD_NAME." = ? ".$countFilterQuery;
 	array_unshift($countFilterQueryData,$cemp);
-	LogManager::getInstance()->debug("Cpunt Filter Query 1:".$sql);
-	LogManager::getInstance()->debug("Cpunt Filter Query Data 1:".json_encode($countFilterQueryData));
-	
+	//LogManager::getInstance()->debug("Cpunt Filter Query 1:".$sql);
+	//LogManager::getInstance()->debug("Cpunt Filter Query Data 1:".json_encode($countFilterQueryData));
 	$rowCount = $obj->DB()->Execute($sql, $countFilterQueryData);
-			
+
 }else{
 	if($isSubOrdinates){
 		$cemp = BaseService::getInstance()->getCurrentProfileId();
@@ -81,19 +79,18 @@ if(in_array($table, BaseService::getInstance()->userTables) && !$skipProfileRest
 		}
 		$subordinatesIds.="";
 		$sql = "Select count(id) as count from ".$obj->_table." where ".SIGN_IN_ELEMENT_MAPPING_FIELD_NAME." in (".$subordinatesIds.") ".$countFilterQuery;
-		LogManager::getInstance()->debug("Cpunt Filter Query 2:".$sql);
-		LogManager::getInstance()->debug("Cpunt Filter Query Data 2:".json_encode($countFilterQueryData));
+		//LogManager::getInstance()->debug("Cpunt Filter Query 2:".$sql);
+		//LogManager::getInstance()->debug("Cpunt Filter Query Data 2:".json_encode($countFilterQueryData));
 		$rowCount = $obj->DB()->Execute($sql,$countFilterQueryData);
 	}else{
 		$sql = "Select count(id) as count from ".$obj->_table;
 		if(!empty($countFilterQuery)){
 			$sql.=" where 1=1 ".$countFilterQuery;
 		}
-		LogManager::getInstance()->debug("Cpunt Filter Query 3:".$sql);
-		LogManager::getInstance()->debug("Cpunt Filter Query Data 3:".json_encode($countFilterQueryData));
+		//LogManager::getInstance()->debug("Cpunt Filter Query 3:".$sql);
+		//LogManager::getInstance()->debug("Cpunt Filter Query Data 3:".json_encode($countFilterQueryData));
 		$rowCount = $obj->DB()->Execute($sql,$countFilterQueryData);
 	}
-	
 }
 
 if(!empty($rowCount)){
@@ -103,7 +100,7 @@ if(!empty($rowCount)){
 }else{
 	$totalRows = 0;
 }
-	
+
 
 /*
  * Output

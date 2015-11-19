@@ -31,6 +31,9 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 		<li class="active"><a id="tabClient" href="#tabPageClient">Clients</a></li>
 		<li><a id="tabProject" href="#tabPageProject">Projects</a></li>
 		<li><a id="tabEmployeeProject" href="#tabPageEmployeeProject">Employee Projects</a></li>
+		<li><a id="tabThirdParties" href="#tabPageThirdParties">Third Parties</a></li>
+		<li><a id="tabScopes" href="#tabPageScopes">Scopes</a></li>
+		<li><a id="tabCategories" href="#tabPageCategories">Categories</a></li>
 	</ul>
 	 
 	<div class="tab-content">
@@ -56,6 +59,30 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 			</div>
 			<div id="EmployeeProjectForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
 		
+			</div>
+		</div>
+		<div class="tab-pane" id="tabPageThirdParties">
+			<div id="ThirdParties" class="reviewBlock" data-content="List" style="padding-left:5px;">
+
+			</div>
+			<div id="ThirdPartiesForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+
+			</div>
+		</div>
+		<div class="tab-pane" id="tabPageScopes">
+			<div id="Scopes" class="reviewBlock" data-content="List" style="padding-left:5px;">
+
+			</div>
+			<div id="ScopesForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+
+			</div>
+		</div>
+		<div class="tab-pane" id="tabPageCategories">
+			<div id="Categories" class="reviewBlock" data-content="List" style="padding-left:5px;">
+
+			</div>
+			<div id="CategoriesForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+
 			</div>
 		</div>
 	</div>
@@ -94,6 +121,7 @@ modJsList['tabProject'].setShowSave(false);
 
 
 modJsList['tabEmployeeProject'] = new EmployeeProjectAdapter('EmployeeProject','EmployeeProject');
+
 modJsList['tabEmployeeProject'].setRemoteTable(true);
 
 <?php if(isset($modulePermissions['perm']['Add Projects']) && $modulePermissions['perm']['Add Projects'] == "No"){?>
@@ -106,6 +134,11 @@ modJsList['tabEmployeeProject'].setShowDelete(false);
 modJsList['tabEmployeeProject'].setShowEdit(false);
 <?php }?>
 
+modJsList['tabThirdParties'] = new ThirdPartiesAdapter('ThirdParties');
+
+modJsList['tabScopes'] = new ScopesAdapter('Scopes');
+
+modJsList['tabCategories'] = new CategoriesAdapter('Categories');
 
 var modJs = modJsList['tabClient'];
 

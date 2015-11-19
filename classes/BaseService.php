@@ -121,8 +121,8 @@ class BaseService{
 				}	
 			}	
 		}
-		
-		
+
+
 		if(!empty($searchTerm) && !empty($searchColumns)){
 			$searchColumnList = json_decode($searchColumns);
 			$tempQuery = " and (";
@@ -146,11 +146,9 @@ class BaseService{
 		if(empty($limit)){
 			$limit = "";	
 		}
-		
-		
-		
+
+
 		if(in_array($table, $this->userTables) && !$skipProfileRestriction){
-			
 			$cemp = $this->getCurrentProfileId();
 			if(!empty($cemp)){
 				if(!$isSubOrdinates){
@@ -181,15 +179,12 @@ class BaseService{
 			$list = $obj->Find("1=1".$query.$orderBy.$limit,$queryData);
 		}	
 
-		
 		if(!empty($mappingStr) && count($map)>0){
 			$list = $this->populateMapping($list, $map);
 		}
-		
-		
 		return $list;
+
 	}
-	
 	public function populateMapping($list,$map){
 		$listNew = array();
 		if(empty($list)){
@@ -197,25 +192,39 @@ class BaseService{
 		}
 		foreach($list as $item){
 			$item = $this->populateMappingItem($item, $map);
-			$listNew[] = $item;	
+			$listNew[] = $item;
 		}
 		return 	$listNew;
 	}
-	
+
+	public function getSubSetData($table,$mappingStr = null, $subSet= null , $subSetValue = 0 ){
+		if(!empty($mappingStr)){
+			$map = json_decode($mappingStr);
+		}
+		$obj = new $table();
+		$this->checkSecureAccess("get",$obj);
+		$query = $subSet."_id= ?";
+		$list = $obj->Load($query , array($subSetValue));
+
+		if(!empty($mappingStr) && count($map)>0){
+			$list = $this->populateMapping($list, $map);
+		}
+		return $list;
+
+	}
+
 	public function populateMappingItem($item,$map){
 		foreach($map as $k=>$v){
 			$fTable = $v[0];
 			$tObj = new $fTable();
 			$tObj->Load($v[1]."= ?",array($item->$k));
-			
 			if($tObj->$v[1] == $item->$k){
 				$v[2] = str_replace("+"," ",$v[2]);
 				$values = explode(" ", $v[2]);
 				if(count($values) == 1){
 					$idField = $k."_id";
 					$item->$idField = $item->$k;
-					$item->$k = $tObj->$v[2];	
-					
+					$item->$k = $tObj->$v[2];
 				}else{
 					$objVal = "";
 					foreach($values as $v){
@@ -233,10 +242,8 @@ class BaseService{
 		return 	$item;
 	}
 	
-	public function getElement($table,$id,$mappingStr = null, $skipSecurityCheck = false){
+	public function getElement($table, $id ,$mappingStr = null, $skipSecurityCheck = false ){
 		$obj = new $table();
-		
-		
 		if(in_array($table, $this->userTables)){
 			$cemp = $this->getCurrentProfileId();
 			if(!empty($cemp)){
@@ -247,7 +254,9 @@ class BaseService{
 		}else{
 			$obj->Load("id = ?",array($id));
 		}
-		
+
+
+
 		if(!$skipSecurityCheck){
 			$this->checkSecureAccess("element",$obj);
 		}
@@ -291,7 +300,6 @@ class BaseService{
 	public function addElement($table,$obj){
 		$isAdd = true;
 		$ele = new $table();
-
 		if(class_exists("ProVersion")){
 			$pro = new ProVersion();
 			$subscriptionTables = $pro->getSubscriptionTables();
@@ -334,7 +342,6 @@ class BaseService{
 
 		$resp =$ele->validateSave($ele);
 
-
  		if($resp->getStatus() != IceResponse::SUCCESS){
 			return $resp;
 		}
@@ -353,7 +360,6 @@ class BaseService{
 		}else{
 			$ele = $ele->executePreUpdateActions($ele)->getData();
 		}
-
 		$ok = $ele->Save();
 
         if(!$ok){
@@ -436,8 +442,8 @@ class BaseService{
 		$values = explode("+", $value);
 		$ret = array();
 		$ele = new $table();
-
 		$list = $ele->Find('1 = 1',array());
+
 		foreach($list as $obj){
 			if(count($values) == 1){
 				$ret[$obj->$key] = $obj->$value;	

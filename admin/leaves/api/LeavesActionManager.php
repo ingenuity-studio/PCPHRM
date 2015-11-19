@@ -144,10 +144,7 @@ class LeavesActionManager extends SubActionManager{
 		$pending = $this->countLeaveAmounts($this->getEmployeeLeaves($employee->id, $currentLeavePeriod->id, $leaveTypeId, 'Pending'));
 		$approved = $this->countLeaveAmounts($this->getEmployeeLeaves($employee->id, $currentLeavePeriod->id, $leaveTypeId, 'Approved'));
 		$rejected = $this->countLeaveAmounts($this->getEmployeeLeaves($employee->id, $currentLeavePeriod->id, $leaveTypeId, 'Rejected'));
-
 		return array($avalilable,$pending,$approved,$rejected);
-
-
 	}
 
 	private function countLeaveAmounts($leaves){

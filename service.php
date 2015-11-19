@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 This file is part of Ice Framework.
 
@@ -262,6 +262,14 @@ if($action == 'get'){
 		}
 	}
 	
+}else if($action == 'loadSub') {
+	$ret['object'] = BaseService::getInstance()->getSubSetData($_REQUEST['t'],$_REQUEST['sm'],$_REQUEST['subSet'],$_REQUEST['subSetValue']);
+	if($ret['object']!=null){
+	$ret['status'] = "SUCCESS";
+	}else{
+		$ret['status'] = "ERROR";
+		$ret['message'] = "Something went wrong , refresh page!";
+	}
 }
 
 echo json_encode($ret);

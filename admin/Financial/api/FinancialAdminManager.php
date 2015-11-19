@@ -39,7 +39,6 @@ if (!class_exists('BenefitsCategorys')) {
 		public function getUserAccess(){
 			return array();
 		}
-
 	}
 }
 if (!class_exists('Benefits')) {

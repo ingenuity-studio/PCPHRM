@@ -13,5 +13,33 @@
     	</div>
   	</div>
 </form>
-
-
+<script type="text/javascript">
+	$( document ).ready(function() {
+		var institute = $('#field_employee_institution');
+		if(institute){
+			institute.after("<button id='add_education' onclick='modJs.addEducation($(this));return false;' class='btn btn-success pull-right'>+ Add Education</button>");
+		}
+		// Adding Form Grouping
+		var personalGroup = $('#field_first_name');
+		if(personalGroup)
+		{
+			personalGroup.before("<legend>Personal Information</legend>");
+		}
+		var educationGroup = $('#field_employee_education');
+		if(educationGroup)
+		{
+			educationGroup.before("<legend>Educational Information</legend>");
+		}
+		var jobGroup = $('#field_bank_account');
+		if(jobGroup)
+		{
+			jobGroup.before("<br><legend>Job Information</legend>");
+		}
+	});
+	// TODO : Subset Module when a select change another changes
+	// TODO : Save Array
+	// TODO : Retrieve Array
+	/*$('#country').change(function(){
+		modJs.changeProvince($(this));
+	 });*/
+</script>

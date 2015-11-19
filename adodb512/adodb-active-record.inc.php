@@ -718,7 +718,7 @@ class ADODB_Active_Record {
 		
 		if (isset($savem)) $db->SetFetchMode($savem);
 		$ADODB_FETCH_MODE = $save;
-		
+
 		return $this->Set($row);
 	}
 	
@@ -989,19 +989,18 @@ class ADODB_Active_Record {
 	
 };
 
-function adodb_GetActiveRecordsClass(&$db, $class, $table,$whereOrderBy,$bindarr, $primkeyArr,
-			$extra)
+function adodb_GetActiveRecordsClass(&$db, $class, $table,$whereOrderBy,$bindarr, $primkeyArr, $extra)
 {
 	$qry = "select * from ".$table;
-	
+
 	if (!empty($whereOrderBy)) {
 		$qry .= ' WHERE '.$whereOrderBy;
 	}
+
 	return adodb_GetActiveRecordsClass2($db, $class, $table, $qry, $bindarr, $primkeyArr, $extra);
 }
 
-function adodb_GetActiveRecordsClass2(&$db, $class, $table, $qry, $bindarr, $primkeyArr,
-			$extra)
+function adodb_GetActiveRecordsClass2(&$db, $class, $table, $qry, $bindarr, $primkeyArr, $extra)
 {
 	global $_ADODB_ACTIVE_DBS;
 
@@ -1015,6 +1014,7 @@ function adodb_GetActiveRecordsClass2(&$db, $class, $table, $qry, $bindarr, $pri
 		} else {
 			$rs = $db->SelectLimit($qry, $extra['limit'],-1,$bindarr);
 		}
+
 		if ($rs) {
 			while (!$rs->EOF) {
 				$rows[] = $rs->fields;
@@ -1022,17 +1022,19 @@ function adodb_GetActiveRecordsClass2(&$db, $class, $table, $qry, $bindarr, $pri
 			}
 		}
 	} else {
+
 		$rows = $db->GetAll($qry,$bindarr);
+
 	}
 
 	$db->SetFetchMode($save);
-	
+
 	$false = false;
-	
+
 	if ($rows === false) {	
 		return $false;
 	}
-	
+
 
 	if (!class_exists($class)) {
 		$db->outp_throw("Unknown class $class in GetActiveRecordsClass()",'GetActiveRecordsClass');
@@ -1048,6 +1050,7 @@ function adodb_GetActiveRecordsClass2(&$db, $class, $table, $qry, $bindarr, $pri
 	foreach($rows as $row) {
 	
 		$obj = new $class($table,$primkeyArr,$db);
+
 		if ($obj->ErrorNo()){
 			$db->_errorMsg = $obj->ErrorMsg();
 			return $false;

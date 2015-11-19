@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $moduleName = 'employees';
 define('MODULE_PATH',dirname(__FILE__));
@@ -42,6 +42,7 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </div>
 <script>

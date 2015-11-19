@@ -112,7 +112,7 @@ if (!class_exists('Skill')) {
 		}
 
 	class Institutions extends ICEHRM_Record {
-		var $_table = 'Institutions';
+		var $_table = 'Institutes';
 
 		public function getAdminAccess(){
 			return array("get","element","save","delete");

@@ -332,6 +332,7 @@ class FinancialActionManager extends SubActionManager{
 	
 		return $sup;
 	}
+
 	
 
 }

@@ -20,8 +20,6 @@ along with iCE Hrm. If not, see <http://www.gnu.org/licenses/>.
 Original work Copyright (c) 2012 [Gamonoid Media Pvt. Ltd]  
 Developer: Thilina Hasantha (thilina.hasantha[at]gmail.com / facebook.com/thilinah)
  */
-
-
 $moduleName = 'leaves';
 define('MODULE_PATH',dirname(__FILE__));
 include APP_BASE_PATH.'header.php';
