@@ -35,7 +35,11 @@ EmployeeAdapter.method('getHeaders', function() {
 });
 
 EmployeeAdapter.method('getInitData', function() {
+<<<<<<< HEAD
 
+=======
+    alert('x');
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 });
 
 EmployeeAdapter.method('getFormFields', function() {
@@ -55,6 +59,7 @@ EmployeeAdapter.method('getFormFields', function() {
 	        [ "gender", {"label":"Gender","type":"select","source":[["Male","Male"],["Female","Female"]]}],
 	        [ "marital_status", {"label":"Marital Status","type":"select","source":[["Married","Married"],["Single","Single"],["Divorced","Divorced"],["Widowed","Widowed"],["Other","Other"]]}],
 			[ "military_status", {"label":"Military Status","type":"select","source":[["Completed","Completed"],["Not Applied","Not Applied"],["Exempted","Exempted"]]}],
+<<<<<<< HEAD
 			[ "image", {"label":"Employee Image","type":"fileupload", "required":false ,"validation":"none"}],
 			[ "id_number", {"label":"ID Number","type":"text", "required":true }],
 			[ "id_expdate", {"label":"ID Expire Date","type":"date", "required":true }],
@@ -86,6 +91,23 @@ EmployeeAdapter.method('getFormFields', function() {
 			[ "contract_startdate", {"label":"Contract Signature Date","type":"date","require":true}],
 			[ "contract_enddate", {"label":"Contract End Date","type":"date","require":true}],
 	        [ "employment_status", {"label":"Employment Status","type":"select2","remote-source":["EmploymentStatus","id","name"]}],
+=======
+			[ "id_number", {"label":"ID Number","type":"text", "required":true }],
+			[ "id_expdate", {"label":"ID Expire Date","type":"date", "required":true }],
+			[ "employee_education", {"label":"Education Degree","type":"select","validation":"none","remote-source":["Education","id","name"]}],
+			[ "employee_institution", {"label":"Education institution","type":"select","validation":"none","remote-source":["Institutes","id","name"]}],
+			[ "ssn_num", {"label":"SSN/NRIC","type":"text","validation":"none"}],
+	        [ "nic_num", {"label":"NIC","type":"text","validation":"none"}],
+	        [ "other_id", {"label":"Other ID","type":"text","validation":"none"}],
+	        [ "car_owner", {"label":"Car Owner?","type":"select","validation":"none","source":[["Yes","Yes"],["No","No"]]}],
+			[ "driving_license", {"label":"Driving License No","type":"text","validation":"none","name":"dl"}],
+			[ "driving_license_exp_date", {"label":"License Exp Date","type":"date","validation":"none"}],
+     		[ "bank_account", {"label":"Bank Account Number","type":"text","validation":"none"}],
+			[ "contract_startdate", {"label":"Contract Signature Date","type":"date","require":true}],
+			[ "contract_enddate", {"label":"Contract End Date","type":"date","require":true}],
+	        [ "employment_status", {"label":"Employment Status","type":"select2","remote-source":["EmploymentStatus","id","name"]}],
+			[ "image", {"label":"Employee Image","type":"fileupload", "required":false ,"validation":"none"}],
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 			[ "job_title", {"label":"Job Title","type":"select2","remote-source":["JobTitle","id","name"]}],
 	        [ "pay_grade", {"label":"Pay Grade","type":"select2","allow-null":true,"remote-source":["PayGrade","id","name"]}],
 	        [ "work_station_id", {"label":"Work Station Id","type":"text","validation":"none"}],
@@ -152,10 +174,21 @@ EmployeeAdapter.method('changeProvince', function(country) {
 	},"JSON");
 });
 
+<<<<<<< HEAD
 EmployeeAdapter.method('save', function() {
 	var validator = new FormValidation(this.getTableName()+"_submit",true,{'ShowPopup':false,"LabelErrorClass":"error"});
 	if(validator.checkValues()){
 		var params = validator.getFormParameters();
+=======
+EmployeeAdapter.method('addEducation', function(instituteField) {
+    var copyEducation = $("#field_employee_education").clone();
+    var copyInstitute = $("#field_employee_institution").clone();
+    instituteField.after(copyInstitute);
+    instituteField.after(copyEducation);
+});
+
+
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 
 		var msg = this.doCustomValidation(params);
 		if(msg == null){

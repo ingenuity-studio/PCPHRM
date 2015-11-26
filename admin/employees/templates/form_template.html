@@ -15,6 +15,7 @@
 </form>
 <script type="text/javascript">
 	$( document ).ready(function() {
+<<<<<<< HEAD
 		var institute = $('#field_employee_institution').last();
 
 		if(institute){
@@ -42,4 +43,11 @@
 	$('#country').change(function(){
 		modJs.changeProvince($(this));
 	 });
+=======
+		var institute = $('#field_employee_institution');
+		if(institute){
+			institute.after("<button id='add_education' onclick='modJs.addEducation($(this));return false;' class='btn btn-success pull-right'>+ Add Education</button>");
+		}
+	});
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 </script>

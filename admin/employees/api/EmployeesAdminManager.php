@@ -47,11 +47,15 @@ if (!class_exists('Employee')) {
 			return "id";
 		}
 
+<<<<<<< HEAD
 		public function executePreSaveActions($obj)
 		{
 
 
 		}
+=======
+
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 	}
 }
 
@@ -128,6 +132,7 @@ if (!class_exists('Institutes')) {
 		}
 	}
 }
+<<<<<<< HEAD
 
 
 if (!class_exists('Languages')) {
@@ -148,3 +153,5 @@ if (!class_exists('Languages')) {
 		}
 	}
 }
+=======
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8

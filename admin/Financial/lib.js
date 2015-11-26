@@ -67,11 +67,18 @@ BenefitsAdapter.method('getHeaders', function() {
 
 BenefitsAdapter.method('getFormFields', function() {
 	return [
+<<<<<<< HEAD
 		[ "benefitscategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["benefitscategorys","id","name"]}],
 		[ "benefitssubcategory_id", {"label":"Sub Category","type":"select2", "allow-null":false , "remote-source":["benefitscategorys","id","name"]}],
 		[ "id", {"label":"ID","type":"hidden","validation":""}],
 		[ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
 		];
+=======
+		[ "id", {"label":"ID","type":"hidden","validation":""}],
+		[ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
+		[ "benefitscategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["benefitscategorys","id","name"]}],
+	];
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 });
 
 BenefitsAdapter.method('getHelpLink', function () {
@@ -105,13 +112,20 @@ AdvantagesAdapter.method('getHeaders', function() {
 
 AdvantagesAdapter.method('getFormFields', function() {
 	return [
+<<<<<<< HEAD
 		[ "advantagescategorys_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["advantagescategorys","id","name"]}],
 		[ "advantagessubcategorys_id", {"label":"Sub Category","type":"select2", "allow-null":false , "remote-source":["advantagescategorys","id","name"]}],
+=======
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 		[ "id", {"label":"ID","type":"hidden","validation":""}],
 		[ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
 		[ "depreciation_time", {"label":"Depreciation Date","type":"date", "required":true ,"validation":""}],
 		[ "depreciation_percentage", {"label":"Depreciation percentage %","type":"text", "required":true ,"validation":"postiveNumber"}],
 		[ "image", {"label":"Item Image","type":"fileupload", "required":false ,"validation":"none"}],
+<<<<<<< HEAD
+=======
+		[ "advantagescategorys_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["advantagescategorys","id","name"]}],
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 	];
 });
 
@@ -119,7 +133,10 @@ AdvantagesAdapter.method('getHelpLink', function () {
 	return 'http://blog.icehrm.com/?page_id=90';
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 /**
  * AllowancesAdapter
  */
@@ -146,11 +163,18 @@ AllowancesAdapter.method('getHeaders', function() {
 
 AllowancesAdapter.method('getFormFields', function() {
     return [
+<<<<<<< HEAD
 		[ "allowancescategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["allowancescategorys","id","name"]}],
 		[ "allowancessubcategory_id", {"label":"Sub Category","type":"select2", "allow-null":false , "remote-source":["allowancescategorys","id","name"]}],
 		[ "id", {"label":"ID","type":"hidden","validation":""}],
         [ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
        ];
+=======
+        [ "id", {"label":"ID","type":"hidden","validation":""}],
+        [ "name", {"label":"Item Name","type":"text", "required":true ,"validation":"notEmpty"}],
+        [ "allowancescategory_id", {"label":"Category","type":"select2", "allow-null":false , "remote-source":["allowancescategorys","id","name"]}],
+    ];
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 });
 
 AllowancesAdapter.method('getHelpLink', function () {

@@ -70,7 +70,11 @@ BaseService::getInstance()->setSettingsManager($settingsManager);
 
 $notificationManager->setBaseService($baseService);
 
+<<<<<<< HEAD
 $debugMode = '0';
+=======
+$debugMode = '1';
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 
 $noJSONRequests = SettingsManager::getInstance()->getSetting("System: Do not pass JSON in request");
 

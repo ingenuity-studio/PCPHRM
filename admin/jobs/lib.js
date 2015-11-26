@@ -36,7 +36,11 @@ JobTitleAdapter.method('getFormFields', function() {
 	        [ "id", {"label":"ID","type":"hidden"}],
 			[ "name", {"label":"Job Title","type":"text"}],
 			[ "code", {"label":"Job Title Code","type":"text"}],
+<<<<<<< HEAD
 		    [ "department", {"label":"Job Department","type":"select2","remote-source":["CompanyStructures","id","title"]}],
+=======
+		    [ "department", {"label":"Job Department","type":"select2","remote-source":["CompanyStructures","id","name"]}],
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 		    [ "grade_category", {"label":"Grade Category","type":"select2","remote-source":["PayGrade","id","name"]}],
 		    [ "reporting_to", {"label":"Reporting To","type":"select2","remote-source":["Employees","id","first_name+last_name"]}],
 		    [ "benefits", {"label":"Benefits","type":"select2","remote-source":["Benefits","id","name"]}],

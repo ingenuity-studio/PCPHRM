@@ -52,6 +52,7 @@ class EmployeesActionManager extends SubActionManager{
 		return new IceResponse(IceResponse::SUCCESS,$data);
 		
 	}
+<<<<<<< HEAD
 	public function saveEmployee($req)
 	{
 		$req=(array)$req;
@@ -117,5 +118,7 @@ class EmployeesActionManager extends SubActionManager{
 			return new IceResponse(IceResponse::ERROR,"");
 
 	}
+=======
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 	
 }

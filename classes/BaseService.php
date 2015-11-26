@@ -346,6 +346,7 @@ class BaseService{
 	public function addElement($table,$obj){
 		$isAdd = true;
 		$ele = new $table();
+
 		if(class_exists("ProVersion")){
 			$pro = new ProVersion();
 			$subscriptionTables = $pro->getSubscriptionTables();
@@ -388,6 +389,10 @@ class BaseService{
 
 		$resp =$ele->validateSave($ele);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
  		if($resp->getStatus() != IceResponse::SUCCESS){
 			return $resp;
 		}
@@ -406,6 +411,10 @@ class BaseService{
 		}else{
 			$ele = $ele->executePreUpdateActions($ele)->getData();
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4da1ae57504ec67f9e28ed7132fd6b88773688c8
 		$ok = $ele->Save();
 
         if(!$ok){
@@ -488,6 +497,7 @@ class BaseService{
 		$values = explode("+", $value);
 		$ret = array();
 		$ele = new $table();
+
 		$list = $ele->Find('1 = 1',array());
 
 		foreach($list as $obj){
