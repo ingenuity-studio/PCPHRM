@@ -119,6 +119,7 @@ AdvantagesAdapter.method('getHelpLink', function () {
 	return 'http://blog.icehrm.com/?page_id=90';
 });
 
+
 /**
  * AllowancesAdapter
  */

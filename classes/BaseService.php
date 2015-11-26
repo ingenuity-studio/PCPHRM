@@ -197,6 +197,13 @@ class BaseService{
 		return 	$listNew;
 	}
 
+	/**
+	 * Description : returns a set of data that is filtered by other condition creating a relation like (country->Province)
+	 * Params : $table : The table that will be queried for the data
+	 * Params : $mappingStr : maps fields to values
+	 * Params : $subSet : the field that will be queried
+	 * Params : $subSetValue : the value that will be queried
+	 */
 	public function getSubSetData($table,$mappingStr = null, $subSet= null , $subSetValue = 0 ){
 		if(!empty($mappingStr)){
 			$map = json_decode($mappingStr);
@@ -204,44 +211,83 @@ class BaseService{
 		$obj = new $table();
 		$this->checkSecureAccess("get",$obj);
 		$query = $subSet."_id= ?";
-		$list = $obj->Load($query , array($subSetValue));
-
+		$list = $obj->Find($query , array($subSetValue));
 		if(!empty($mappingStr) && count($map)>0){
 			$list = $this->populateMapping($list, $map);
 		}
 		return $list;
-
 	}
 
 	public function populateMappingItem($item,$map){
 		foreach($map as $k=>$v){
 			$fTable = $v[0];
 			$tObj = new $fTable();
+			if($this->is_serialized($item->$k)){
+                $item->$k=unserialize($item->$k);
+                $i=0;
+                foreach($item->$k as $value)
+                {
+                    $tObj->Load($v[1]."= ?",array($value));
+
+                    if($tObj->$v[1] == $value){
+
+                        $v[2] = str_replace("+"," ",$v[2]);
+                        $values = explode(" ", $v[2]);
+
+                        if(count($values) == 1){
+                            if($i==0)
+                            $idField = $k."_id";
+                            else
+                            $idField = $k."_id".$i;
+                            $item->$idField = $value;
+                            $value = $tObj->$v[2];
+                        }else{
+                            $objVal = "";
+                            foreach($values as $v){
+                                if($objVal != ""){
+                                    $objVal .= " ";
+                                }
+                                $objVal .= $tObj->$v;
+                            }
+                            if($i==0)
+                                $idField = $k."_id";
+                            else
+                                $idField = $k."_id".$i;
+                            $item->$idField = $value;
+                            $value = $objVal;
+                        }
+                    }
+                    $i = $i+1;
+                }
+            }
+            else{
 			$tObj->Load($v[1]."= ?",array($item->$k));
-			if($tObj->$v[1] == $item->$k){
-				$v[2] = str_replace("+"," ",$v[2]);
-				$values = explode(" ", $v[2]);
-				if(count($values) == 1){
-					$idField = $k."_id";
-					$item->$idField = $item->$k;
-					$item->$k = $tObj->$v[2];
-				}else{
-					$objVal = "";
-					foreach($values as $v){
-						if($objVal != ""){
-							$objVal .= " ";	
-						}
-						$objVal .= $tObj->$v;
-					}
-					$idField = $k."_id";
-					$item->$idField = $item->$k;
-					$item->$k = $objVal;
-				}
-			}	
+                if($tObj->$v[1] == $item->$k){
+                    $v[2] = str_replace("+"," ",$v[2]);
+                    $values = explode(" ", $v[2]);
+                    if(count($values) == 1){
+                        $idField = $k."_id";
+                        $item->$idField = $item->$k;
+                        $item->$k = $tObj->$v[2];
+                    }else{
+                        $objVal = "";
+                        foreach($values as $v){
+                            if($objVal != ""){
+                                $objVal .= " ";
+                            }
+                            $objVal .= $tObj->$v;
+                        }
+                        $idField = $k."_id";
+                        $item->$idField = $item->$k;
+                        $item->$k = $objVal;
+                    }
+                }
+            }
+
 		}
 		return 	$item;
 	}
-	
+
 	public function getElement($table, $id ,$mappingStr = null, $skipSecurityCheck = false ){
 		$obj = new $table();
 		if(in_array($table, $this->userTables)){
@@ -276,12 +322,12 @@ class BaseService{
 						if(count($values) == 1){
 							$idField = $name."_id";
 							$obj->$idField = $obj->$name;
-							$obj->$name = $tObj->$v[2];	
+							$obj->$name = $tObj->$v[2];
 						}else{
 							$objVal = "";
 							foreach($values as $v){
 								if($objVal != ""){
-									$objVal .= " ";	
+									$objVal .= " ";
 								}
 								$objVal .= $tObj->$v;
 							}
@@ -289,7 +335,7 @@ class BaseService{
 							$obj->$idField = $obj->$name;
 							$obj->$name = $objVal;
 						}
-					}	
+					}
 				}
 			}
 			return 	$obj;
@@ -813,6 +859,61 @@ class BaseService{
 	public function getEmailSender(){
 		return $this->emailSender;
 	}
+
+	public function  is_serialized( $data, $strict = true ) {
+          // if it isn't a string, it isn't serialized.
+          if ( ! is_string( $data ) ) {
+            return false;
+          }
+        $data = trim( $data );
+        if ( 'N;' == $data ) {
+            return true;
+        }
+        if ( strlen( $data ) < 4 ) {
+            return false;
+        }
+        if ( ':' !== $data[1] ) {
+            return false;
+        }
+        if ( $strict ) {
+            $lastc = substr( $data, -1 );
+            if ( ';' !== $lastc && '}' !== $lastc ) {
+                return false;
+            }
+        } else {
+            $semicolon = strpos( $data, ';' );
+            $brace     = strpos( $data, '}' );
+            // Either ; or } must exist.
+            if ( false === $semicolon && false === $brace )
+                return false;
+            // But neither must be in the first X characters.
+            if ( false !== $semicolon && $semicolon < 3 )
+                return false;
+            if ( false !== $brace && $brace < 4 )
+                return false;
+        }
+        $token = $data[0];
+        switch ( $token ) {
+            case 's' :
+                if ( $strict ) {
+                    if ( '"' !== substr( $data, -2, 1 ) ) {
+                        return false;
+                    }
+                } elseif ( false === strpos( $data, '"' ) ) {
+                    return false;
+                }
+            // or else fall through
+            case 'a' :
+            case 'O' :
+                return (bool) preg_match( "/^{$token}:[0-9]+:/s", $data );
+            case 'b' :
+            case 'i' :
+            case 'd' :
+                $end = $strict ? '$' : '';
+                return (bool) preg_match( "/^{$token}:[0-9.E-]+;$end/", $data );
+        }
+        return false;
+        }
 }
 
 class IceConstants{

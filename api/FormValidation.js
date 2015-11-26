@@ -61,7 +61,7 @@ function FormValidation(formId,validateAll,options) {
 				if (str != null && str.match(numstr)) {
 					return true;
 				} else {
-					return false;
+					return str != null && numstr.test(str);
 				}
 			},
 			
@@ -125,6 +125,8 @@ FormValidation.method('addError' , function(formInput, overrideMessage) {
 				$('#'+ this.formId +' #help_'+id).html("Number required");
 			}else if(validation == "email"){
 				$('#'+ this.formId +' #help_'+id).html("Email required");
+			}else if(validation == "postiveNumber") {
+				$('#' + this.formId + ' #help_' + id).html("This value can't be negative");
 			}else{
 				$('#'+ this.formId +' #help_'+id).html("Required");
 			}

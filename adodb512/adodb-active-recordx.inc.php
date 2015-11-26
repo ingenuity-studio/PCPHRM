@@ -901,7 +901,6 @@ class ADODB_Active_Record {
 		$db = $this->DB(); if (!$db) return false;
 		$cnt = 0;
 		$table = $this->TableInfo();
-		
 		$valarr = array();
 		$names = array();
 		$valstr = array();

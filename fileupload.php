@@ -6,7 +6,6 @@
 include ("config.base.php");
 include ("include.common.php");
 include_once ('server.includes.inc.php');
-
 /**
  * Handle file uploads via regular form post (uses the $_FILES array)
  */
@@ -78,8 +77,8 @@ class qqFileUploader {
         }
         
         $size = $this->file->getSize();
-        LogManager::getInstance()->info('file size ='.$size);
-        LogManager::getInstance()->info('file size limit ='.$this->sizeLimit);
+        //LogManager::getInstance()->info('file size ='.$size);
+        //LogManager::getInstance()->info('file size limit ='.$this->sizeLimit);
         if ($size == 0) {
             return array('success'=>0,'error' => 'File is empty');
         }
@@ -87,9 +86,10 @@ class qqFileUploader {
         if ($size > $this->sizeLimit) {
             return array('success'=>0,'error' => 'File is too large');
         }
-        
         $pathinfo = pathinfo($this->file->getName());
+
         $filename = $pathinfo['filename'];
+
         //$filename = md5(uniqid());
         $ext = $pathinfo['extension'];
 
@@ -147,7 +147,7 @@ $s3WebUrl = SettingsManager::getInstance()->getSetting("Files: S3 Web Url");
 
 $uploadedToS3 = false;
 
-LogManager::getInstance()->info($uploadFilesToS3."|".$uploadFilesToS3Key."|".$uploadFilesToS3Secret."|".$s3Bucket."|".$s3WebUrl."|".CLIENT_NAME);
+//LogManager::getInstance()->info($uploadFilesToS3."|".$uploadFilesToS3Key."|".$uploadFilesToS3Secret."|".$s3Bucket."|".$s3WebUrl."|".CLIENT_NAME);
 
 if($uploadFilesToS3.'' == '1' && !empty($uploadFilesToS3Key) && !empty($uploadFilesToS3Secret) &&
 	!empty($s3Bucket) && !empty($s3WebUrl)){
@@ -156,9 +156,9 @@ if($uploadFilesToS3.'' == '1' && !empty($uploadFilesToS3Key) && !empty($uploadFi
 	
 	$f_size = filesize($localFile);
 	$uploadname = CLIENT_NAME."/".$result['filename'];
-	LogManager::getInstance()->info("Upload file to s3:".$uploadname);
-	LogManager::getInstance()->info("Local file:".$localFile);
-	LogManager::getInstance()->info("Local file size:".$f_size);
+	//LogManager::getInstance()->info("Upload file to s3:".$uploadname);
+	//LogManager::getInstance()->info("Local file:".$localFile);
+	//LogManager::getInstance()->info("Local file size:".$f_size);
 	
 	
 	$s3FileSys = new S3FileSystem($uploadFilesToS3Key, $uploadFilesToS3Secret);
@@ -166,7 +166,7 @@ if($uploadFilesToS3.'' == '1' && !empty($uploadFilesToS3Key) && !empty($uploadFi
 	
 	$file_url = $s3WebUrl.$uploadname;
 	$file_url = $s3FileSys->generateExpiringURL($file_url);
-	LogManager::getInstance()->info("Response from s3 file sys:".print_r($res,true));
+	//LogManager::getInstance()->info("Response from s3 file sys:".print_r($res,true));
 	unlink($localFile);
 	
 	$uploadedToS3 = true;

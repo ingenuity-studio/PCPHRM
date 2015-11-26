@@ -248,7 +248,6 @@ AdapterBase.method('getFailCallBack', function(callBackData,serverData) {
 	
 });
 
-
 AdapterBase.method('getElement', function(id,callBackData) {
 	var that = this;
 	var sourceMappingJson = JSON.stringify(this.getSourceMapping());
@@ -362,4 +361,28 @@ AdapterBase.method('getClientDataUrl', function() {
 
 AdapterBase.method('getCustomUrl', function(str) {
 	return this.moduleRelativeURL.replace("service.php",str);
+});
+
+/**
+ * Description : Change a target select2 options with a new set of data
+ * params : target : the id of the select2
+ * params : data :  is the new data set that select 2 will be updated with
+ */
+AdapterBase.method('changeSelect2Options', function(target,data)
+{
+    if(target){
+        var options="";
+        var select2 = $("select#"+target);
+        select2.find('option').remove();
+        if(data.object.length>0){
+        for (i = 0; i < data.object.length; i++) {
+            options +="<option value='"+data.object[i].id+"'>"+data.object[i].name+"</option>";
+        }
+        }else{
+            options ="<option value='NULL'>None</option>";
+        }
+        select2.html(options);
+    }else{
+        alert("Something went wrong , refresh the page");
+    }
 });

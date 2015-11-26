@@ -1343,10 +1343,15 @@ IceHRMBase.method('renderFormField', function(field) {
 	if(field[1].validation != "none" &&  field[1].validation != "emailOrEmpty" && field[1].type != "placeholder" && field[1].label.indexOf('*') < 0){
 		field[1].label = field[1].label + '<font class="redFont">*</font>';
 	}
+    if(field[1].name){
+        t = t.replace(/_name_/g,field[1].name);
+    }
+    else{
+        t = t.replace(/_name_/g,field[0]);
+    }
 	if(field[1].type == 'text' || field[1].type == 'textarea' || field[1].type == 'hidden' || field[1].type == 'label' || field[1].type == 'placeholder'){
 		t = t.replace(/_id_/g,field[0]);
 		t = t.replace(/_label_/g,field[1].label);
-		
 	}else if(field[1].type == 'select' || field[1].type == 'select2' || field[1].type == 'select2multi'){
 		t = t.replace(/_id_/g,field[0]);
 		t = t.replace(/_label_/g,field[1].label);
@@ -1541,7 +1546,7 @@ IceHRMBase.method('getActionButtons', function(obj) {
 	return modJs.getActionButtonsHtml(obj.aData[0],obj.aData);
 });
 
-IceHRMBase.method('getActionButtonsHtml', function(id,data) {	
+IceHRMBase.method('getActionButtonsHtml', function(id,data) {
 	var editButton = '<img class="tableActionButton" src="_BASE_images/edit.png" style="cursor:pointer;" rel="tooltip" title="Edit" onclick="modJs.edit(_id_);return false;"></img>';
 	var deleteButton = '<img class="tableActionButton" src="_BASE_images/delete.png" style="margin-left:15px;cursor:pointer;" rel="tooltip" title="Delete" onclick="modJs.deleteRow(_id_);return false;"></img>';
 	var html = '<div style="width:80px;">_edit__delete_</div>';
@@ -1636,3 +1641,5 @@ IceHRMBase.method('getHelpLink', function () {
 	return null;
 
 });
+
+

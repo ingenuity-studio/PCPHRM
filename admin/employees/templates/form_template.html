@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="_id_" xmlns="http://www.w3.org/1999/html">
+<form class="form-horizontal" id="_id_" method="post" xmlns="http://www.w3.org/1999/html">
 	<div class="control-group">
 		<div class="controls">
 		  	<span class="label label-warning" id="_id__error" style="display:none;"></span>
@@ -15,7 +15,8 @@
 </form>
 <script type="text/javascript">
 	$( document ).ready(function() {
-		var institute = $('#field_employee_institution');
+		var institute = $('#field_employee_institution').last();
+
 		if(institute){
 			institute.after("<button id='add_education' onclick='modJs.addEducation($(this));return false;' class='btn btn-success pull-right'>+ Add Education</button>");
 		}
@@ -25,7 +26,7 @@
 		{
 			personalGroup.before("<legend>Personal Information</legend>");
 		}
-		var educationGroup = $('#field_employee_education');
+		var educationGroup = $('#field_employee_education').first();
 		if(educationGroup)
 		{
 			educationGroup.before("<legend>Educational Information</legend>");
@@ -35,11 +36,10 @@
 		{
 			jobGroup.before("<br><legend>Job Information</legend>");
 		}
+
 	});
-	// TODO : Subset Module when a select change another changes
-	// TODO : Save Array
 	// TODO : Retrieve Array
-	/*$('#country').change(function(){
+	$('#country').change(function(){
 		modJs.changeProvince($(this));
-	 });*/
+	 });
 </script>

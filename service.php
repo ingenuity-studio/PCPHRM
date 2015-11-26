@@ -99,7 +99,7 @@ if($action == 'get'){
 	
 	$subAction = $_REQUEST['sa'];
 	$apiFile = APP_BASE_PATH.$modPath[0]."/".$modPath[1]."/api/".$moduleCapsName."ActionManager.php";
-	LogManager::getInstance()->info("Api File:".$apiFile);
+	//LogManager::getInstance()->info("Api File:".$apiFile);
 	$emailSenderFile = APP_BASE_PATH.$modPath[0]."/".$modPath[1]."/api/".$moduleCapsName."EmailSender.php";
 	if(file_exists($apiFile)){
 		include ($apiFile);
@@ -271,5 +271,4 @@ if($action == 'get'){
 		$ret['message'] = "Something went wrong , refresh page!";
 	}
 }
-
 echo json_encode($ret);

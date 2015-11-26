@@ -35,7 +35,7 @@ EmployeeAdapter.method('getHeaders', function() {
 });
 
 EmployeeAdapter.method('getInitData', function() {
-    alert('x');
+
 });
 
 EmployeeAdapter.method('getFormFields', function() {
@@ -44,7 +44,6 @@ EmployeeAdapter.method('getFormFields', function() {
 		["Professional Working Proficiency","Professional Working Proficiency"],
 		["Full Professional Proficiency","Full Professional Proficiency"],
 		["Native or Bilingual Proficiency","Native or Bilingual Proficiency"]];
-
 	return [
 	        [ "id", {"label":"ID","type":"hidden","validation":""}],
 	        [ "employee_id", {"label":"Employee Number","type":"text","validation":""}],
@@ -68,7 +67,7 @@ EmployeeAdapter.method('getFormFields', function() {
 			[ "address2", {"label":"Address Line 2","type":"text","validation":"none"}],
 			[ "city", {"label":"City","type":"text","validation":"none"}],
 			[ "country", {"label":"Country","type":"select2","remote-source":["Country","code","name"]}],
-			[ "province", {"label":"Province","type":"select2","allow-null":true,"remote-source":["Province","id","name"]}],
+			[ "province", {"label":"Province","type":"select2","allow-null":true,"null-label":'None',"remote-source":["Province","id","name"]}],
 			[ "language_id", {"label":"Language","type":"select2","allow-null":false,"remote-source":["Language","id","name"]}],
 			[ "reading", {"label":"Reading","type":"select","source":compArray}],
 			[ "speaking", {"label":"Speaking","type":"select","source":compArray}],
@@ -78,8 +77,8 @@ EmployeeAdapter.method('getFormFields', function() {
 			[ "car_owner", {"label":"Car Owner?","type":"select","validation":"none","source":[["Yes","Yes"],["No","No"]]}],
 			[ "driving_license", {"label":"Driving License No","type":"text","validation":"none","name":"dl"}],
 			[ "driving_license_exp_date", {"label":"License Exp Date","type":"date","validation":"none"}],
-			[ "employee_education", {"label":"Education Degree","type":"select","validation":"none","remote-source":["Education","id","name"]}],
-			[ "employee_institution", {"label":"Education institution","type":"select","validation":"none","remote-source":["Institutes","id","name"]}],
+			[ "employee_education", {"label":"Education Degree","name":"employee_education","type":"select","validation":"none","remote-source":["Education","id","name"]}],
+			[ "employee_institution", {"label":"Education institution","name":"employee_institution","type":"select","validation":"none","remote-source":["Institutes","id","name"]}],
 		    /*[ "ssn_num", {"label":"SSN/NRIC","type":"text","validation":"none"}],
 	        [ "nic_num", {"label":"NIC","type":"text","validation":"none"}],
 	        [ "other_id", {"label":"Other ID","type":"text","validation":"none"}],*/
@@ -128,23 +127,72 @@ EmployeeAdapter.method('closeTransferWindows', function() {
 });
 
 EmployeeAdapter.method('addEducation', function(instituteField) {
-    var copyEducation = $("#field_employee_education").clone();
-    var copyInstitute = $("#field_employee_institution").clone();
-    instituteField.after(copyInstitute);
-    instituteField.after(copyEducation);
+	if(num==0) num = $('#field_employee_education').length;
+	else num = num + 1;
+	var newElemdegree = $('#field_employee_education').last().clone();
+	newElemdegree.find("#employee_education").attr('id', 'employee_education'+num).attr('name', 'employee_education'+num);
+	var newEleminstitution = $('#field_employee_institution').last().clone();
+	newEleminstitution.find("#employee_institution").attr('id', 'employee_institution' +num).attr('name', 'employee_institution'+num);
+	instituteField.before(newElemdegree);
+	instituteField.before(newEleminstitution);
+
 });
 
 EmployeeAdapter.method('changeProvince', function(country) {
 	var table='province';
 	$.post(this.moduleRelativeURL,{'a':'loadSub','t': table  ,'sm':null , 'subSet':'country','subSetValue':country.val()},function(data){
 		if(data.status == "SUCCESS"){
-			console.log(data);
+			modJs.changeSelect2Options('province',data);
 			}else{
-			alert("Something went wrong , refresh the page");
+			var select2 = $("select#"+table);
+			select2.find('option').remove();
+			options ="<option value='NULL'>None</option>";
+			select2.html(options);
 		}
-	});
+	},"JSON");
 });
 
+EmployeeAdapter.method('save', function() {
+	var validator = new FormValidation(this.getTableName()+"_submit",true,{'ShowPopup':false,"LabelErrorClass":"error"});
+	if(validator.checkValues()){
+		var params = validator.getFormParameters();
+
+		var msg = this.doCustomValidation(params);
+		if(msg == null){
+			var id = $('#'+this.getTableName()+"_submit #id").val();
+			if(id != null && id != undefined && id != ""){
+				$(params).attr('id',id);
+				this.add(params,[]);
+			}else{
+
+				var reqJson = JSON.stringify(params);
+
+				var callBackData = [];
+				callBackData['callBackData'] = [];
+				callBackData['callBackSuccess'] = 'saveEmployeeSuccessCallBack';
+				callBackData['callBackFail'] = 'saveEmployeeFailCallBack';
+
+				this.customAction('saveEmployee','admin=employees',reqJson,callBackData);
+			}
+
+		}else{
+			//$("#"+this.getTableName()+'Form .label').html(msg);
+			//$("#"+this.getTableName()+'Form .label').show();
+			this.showMessage("Error Saving Employee",msg);
+		}
+
+
+
+	}
+});
+
+EmployeeAdapter.method('saveEmployeeSuccessCallBack', function() {
+	this.get([]);
+});
+
+EmployeeAdapter.method('saveEmployeeFailCallBack', function() {
+	this.get([]);
+});
 
 function ProjectAdapter(endPoint) {
 	this.initAdapter(endPoint);

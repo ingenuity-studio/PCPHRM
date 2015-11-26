@@ -52,5 +52,7 @@ modJsList['tabEmployee'].setRemoteTable(true);
 modJsList['tabProject'] = new ProjectAdapter('Project');
 modJsList['tabProject'].setRemoteTable(true);
 var modJs = modJsList['tabEmployee'];
+var num=0;
+modJs.getInitData();
 </script>
 <?php include APP_BASE_PATH.'footer.php';?>

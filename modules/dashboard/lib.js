@@ -153,7 +153,6 @@ DashboardAdapter.method('getEmployeeActiveProjectsFailCallBack', function(callBa
 });
 
 DashboardAdapter.method('getClientDate', function (date) {
-
 	var offset = this.getClientGMTOffset();
     var tzDate = date.addMinutes(offset*60);
     return tzDate;
